@@ -1,0 +1,31 @@
+.container-fluid {
+    padding-left: 0;
+}
+
+.fixed-left {
+    height: 1000px;
+    padding-left: 10px;
+}
+
+.left-column {
+    padding-left: 20px;
+    width: 30%;
+}
+
+.city-card-col {
+    padding-left: 20px;
+    padding-top: 30px;
+    width: 60%;
+}
+
+.search {
+    padding: 10px;
+}
+
+.city-card-daily-col {
+    margin-top: 10px;
+}
+
+.city-card-main {
+    width: 85%;
+}

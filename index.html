@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Weather Dashboard</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- Moment JS -->
+    <script type="text/javascript" src="https://momentjs.com/downloads/moment-with-locales.js"></script>
+    <!-- CSS -->
+    <link rel="stylesheet" href="./style.css">
+    <!-- JQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  </head>
+  <body>
+    <nav class="navbar navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">
+        <img src="./assets/images/mainweathericon.png" width="30" height="30" class="d-inline-block align-top" alt="A sun behind a cloud">Weather Dashboard
+        </a>
+    </nav> 
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 left-column">
+                <div class="fixed-left bg-light">
+                    <br>
+                    <form class="form-inline">
+                        <h3 class="search">Search City:</h3>
+                        <input class="form-control mr-sm-2" type="search" placeholder="Search City" aria-label="Search">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                    </form>
+                </div>
+            </div>
+            <div class="col-xs-8 city-card-col">
+                <div class="card city-card-main">
+                    <div class="card-body">
+                        <h3 class="city-name">City Goes Here</h3>
+                        <div class="city-temp">Temperature:</div>
+                        <div class="city-humidity">Humidity:</div>
+                        <div class="city-wind">Wind Speed:</div>
+                        <div class="city-UV">UV-Index:</div>
+                    </div>
+                </div>
+                <br>
+                <h3>5 Day Forecast</h3>
+                <div class="row">
+                    <div class="col-sm-2 city-card-daily-col">
+                        <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title city-day" data-value=1></h5>
+                            <p class="card-text city-card-daily" data-value=1></p>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-2 city-card-daily-col">
+                        <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title city-day" data-value=2></h5>
+                            <p class="card-text city-card-daily" data-value=2></p>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-2 city-card-daily-col">
+                        <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title city-day" data-value=3></h5>
+                            <p class="card-text city-card-daily" data-value=3></p>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-2 city-card-daily-col">
+                        <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title city-day" data-value=4></h5>
+                            <p class="card-text city-card-daily" data-value=4></p>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-2 city-card-daily-col">
+                        <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title city-day" data-value=5></h5>
+                            <p class="card-text city-card-daily" data-value=5></p>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+    <!-- JS -->
+    <script type="text/javascript">
+        var lat = "40.58389873898139";
+        var lon = "-111.65965384546135";
+        var queryURL = "http://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&units=imperial&exclude=hourly,minutely&appid=362001ca18aa50ad6cce0cd209741e8b";
+        console.log(queryURL)
+        $.ajax({
+            url: queryURL,
+            method: "GET"
+        }).then(function(response) {
+            console.log(response)
+            //current weather
+            var currentTemp = response.current.temp;
+            var currentHumidity = response.current.humidity;
+            var currentWind = response.current.wind_speed;
+            var currentUV = response.current.uvi;
+            $(".city-temp").append(" " + currentTemp + " °F");
+            $(".city-humidity").append(" " + currentHumidity + "%");
+            $(".city-UV").append(" " + currentUV);
+            //5 day forecast
+            for (let i = 1; i < response.daily.length - 2; i++) {
+                var forecastTemp = response.daily[i].temp.day;
+                var forecastHumidity = response.daily[i].humidity;
+                var forecastDay = moment.unix(response.daily[i].dt).format('MMMM Do YYYY');
+                $(".city-day").each(function() {
+                    if (i == $(this).attr("data-value")) {
+                        $(this).append(forecastDay);
+                    }
+                })
+                $(".city-card-daily").each(function() {
+                    if (i == $(this).attr("data-value")) {
+                        $(this).append("Temp: " + forecastTemp + " °F" + "<br>");
+                        $(this).append("Humidity: " + forecastTemp + "%");
+                    }
+                })
+            }
+
+        
+            
+        });
+    
+    </script>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+</html>
