@@ -113,6 +113,7 @@
             var currentUV = response.current.uvi;
             $(".city-temp").append(" " + currentTemp + " °F");
             $(".city-humidity").append(" " + currentHumidity + "%");
+            $(".city-wind").append(" " + currentWind + " MPH")
             $(".city-UV").append(" " + currentUV);
             //5 day forecast
             for (let i = 1; i < response.daily.length - 2; i++) {
