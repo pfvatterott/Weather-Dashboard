@@ -1,29 +1,33 @@
 <!doctype html>
 <html lang="en">
-  <head>
+
+<head>
     <title>Weather Dashboard</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <!-- FontAwesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
-    integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
     <!-- Moment JS -->
     <script type="text/javascript" src="https://momentjs.com/downloads/moment-with-locales.js"></script>
     <!-- CSS -->
     <link rel="stylesheet" href="./style.css">
     <!-- JQuery -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  </head>
-  <body>
+</head>
+
+<body>
     <nav class="navbar navbar-dark bg-dark">
         <a class="navbar-brand" href="#">
-        <img src="./assets/images/mainweathericon.png" width="30" height="30" class="d-inline-block align-top" alt="A sun behind a cloud">Weather Dashboard
+            <img src="./assets/images/mainweathericon.png" width="30" height="30" class="d-inline-block align-top"
+                alt="A sun behind a cloud">Weather Dashboard
         </a>
-    </nav> 
+    </nav>
 
     <div class="container-fluid">
         <div class="row">
@@ -34,13 +38,14 @@
                     <div class="input-group mb-3 search">
                         <input type="text" class="form-control search-city-form" placeholder="Search City">
                         <div class="input-group-append">
-                          <button class="btn btn-outline-secondary fas fa-search search-city-button" type="submit"></button>
+                            <button class="btn btn-outline-secondary fas fa-search search-city-button"
+                                type="submit"></button>
                         </div>
                     </div>
-                <div class="card list-of-city-cards" style="width: 16rem;">
-                    <ul class="list-group list-group-flush city-list-group">
-                    </ul>
-                </div>
+                    <div class="card list-of-city-cards" style="width: 16rem;">
+                        <ul class="list-group list-group-flush city-list-group">
+                        </ul>
+                    </div>
                 </div>
             </div>
             <div class="col-xs-8 city-card-col">
@@ -58,42 +63,42 @@
                 <div class="row">
                     <div class="col-sm-2 city-card-daily-col">
                         <div class="card city-card-daily-body">
-                        <div class="card-body">
-                            <h5 class="card-title city-day" data-value=1></h5>
-                            <p class="card-text city-card-daily" data-value=1></p>
-                        </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-2 city-card-daily-col">
-                        <div class="card city-card-daily-body">
-                        <div class="card-body">
-                            <h5 class="card-title city-day" data-value=2></h5>
-                            <p class="card-text city-card-daily" data-value=2></p>
-                        </div>
+                            <div class="card-body">
+                                <h5 class="card-title city-day" data-value=1></h5>
+                                <p class="card-text city-card-daily" data-value=1></p>
+                            </div>
                         </div>
                     </div>
                     <div class="col-sm-2 city-card-daily-col">
                         <div class="card city-card-daily-body">
-                        <div class="card-body">
-                            <h5 class="card-title city-day" data-value=3></h5>
-                            <p class="card-text city-card-daily" data-value=3></p>
-                        </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-2 city-card-daily-col">
-                        <div class="card city-card-daily-body">
-                        <div class="card-body">
-                            <h5 class="card-title city-day" data-value=4></h5>
-                            <p class="card-text city-card-daily" data-value=4></p>
-                        </div>
+                            <div class="card-body">
+                                <h5 class="card-title city-day" data-value=2></h5>
+                                <p class="card-text city-card-daily" data-value=2></p>
+                            </div>
                         </div>
                     </div>
                     <div class="col-sm-2 city-card-daily-col">
                         <div class="card city-card-daily-body">
-                        <div class="card-body">
-                            <h5 class="card-title city-day" data-value=5></h5>
-                            <p class="card-text city-card-daily" data-value=5></p>
+                            <div class="card-body">
+                                <h5 class="card-title city-day" data-value=3></h5>
+                                <p class="card-text city-card-daily" data-value=3></p>
+                            </div>
                         </div>
+                    </div>
+                    <div class="col-sm-2 city-card-daily-col">
+                        <div class="card city-card-daily-body">
+                            <div class="card-body">
+                                <h5 class="card-title city-day" data-value=4></h5>
+                                <p class="card-text city-card-daily" data-value=4></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-2 city-card-daily-col">
+                        <div class="card city-card-daily-body">
+                            <div class="card-body">
+                                <h5 class="card-title city-day" data-value=5></h5>
+                                <p class="card-text city-card-daily" data-value=5></p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -126,7 +131,7 @@
         }
 
         // Search City Event Listener
-        $(".search-city-button").on("click", function() {
+        $(".search-city-button").on("click", function () {
             cityList = JSON.parse(localStorage.getItem("allCities"));
             if (cityList != null) {
                 cityList.push({ city: $(".search-city-form").val() });
@@ -138,11 +143,12 @@
                 cityList = [{ city: $(".search-city-form").val() }];
                 localStorage.setItem("allCities", JSON.stringify(cityList));
                 generateCityList(cityList);
+                getCityCoords($(".search-city-form").val());
             }
         })
 
         // City List Event Listener
-        $(document).on("click", ".city-card", function() {
+        $(document).on("click", ".city-card", function () {
             console.log($(this).text())
             getCityCoords($(this).text());
         })
@@ -156,7 +162,7 @@
             $j.ajax({
                 url: coordsURL,
                 method: "GET",
-                success: function(coordsResponse) {
+                success: function (coordsResponse) {
                     console.log(coordsResponse);
                     var lat = coordsResponse.coord.lat;
                     var lon = coordsResponse.coord.lon;
@@ -171,7 +177,7 @@
             $j.ajax({
                 url: queryURL,
                 method: "GET",
-                success: function(response) {
+                success: function (response) {
                     console.log(response)
                     //current weather
                     var currentTemp = response.current.temp;
@@ -187,32 +193,44 @@
                         var forecastTemp = response.daily[i].temp.day;
                         var forecastHumidity = response.daily[i].humidity;
                         var forecastDay = moment.unix(response.daily[i].dt).format('MMMM Do YYYY');
-                        $(".city-day").each(function() {
+                        $(".city-day").each(function () {
                             if (i == $(this).attr("data-value")) {
                                 $(this).empty();
                                 $(this).append(forecastDay);
                             }
                         })
-                        $(".city-card-daily").each(function() {
+                        $(".city-card-daily").each(function () {
                             if (i == $(this).attr("data-value")) {
                                 $(this).empty();
                                 $(this).append("Temp: " + forecastTemp + " °F" + "<br>" + "Humidity: " + forecastHumidity + "%");
                             }
                         })
-                    }    
+                    }
                 }
             })
         }
 
-        getCityCoords(cityList[0].city);
-        
+        // If no local available run default New York City
+        if (cityList === null) {
+            getCityCoords("New York City");
+        } else {
+            getCityCoords(cityList[0].city);
+        }
+
     </script>
 
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-  </body>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+
 </html>
