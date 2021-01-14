@@ -2,31 +2,47 @@
     padding-left: 0;
 }
 
+/* Left Column Formatting */
 .fixed-left {
     height: 1000px;
     padding-left: 10px;
+    left: 200px;
 }
 
 .left-column {
     padding-left: 20px;
-    width: 30%;
-}
-
-.city-card-col {
-    padding-left: 20px;
-    padding-top: 30px;
-    width: 60%;
+    width: 300px;
 }
 
 .search {
-    padding: 10px;
+    width: 250px;
 }
 
+.list-of-city-cards {
+    margin-top: 30px;
+}
+
+.city-card:hover {
+    background-color: lightgrey;
+}
+
+/* City Cards Daily and Main */
 .city-card-daily-col {
     margin-top: 10px;
 }
 
-
 .city-card-main {
-    width: 85%;
+    width: 60%;
+}
+
+.city-card-col {
+    position: absolute;
+    padding-left: 320px;
+    padding-top: 30px;
+    width: 1200px;
+    z-index: -1;
+}
+
+.city-card-daily-body{
+    width: 150px;
 }

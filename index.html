@@ -8,6 +8,9 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+    integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
     <!-- Moment JS -->
     <script type="text/javascript" src="https://momentjs.com/downloads/moment-with-locales.js"></script>
     <!-- CSS -->
@@ -27,11 +30,17 @@
             <div class="col-xs-4 left-column">
                 <div class="fixed-left bg-light">
                     <br>
-                    <form class="form-inline">
-                        <h3 class="search">Search City:</h3>
-                        <input class="form-control mr-sm-2" type="search" placeholder="Search City" aria-label="Search">
-                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                    </form>
+                    <h3>Search for a City:</h3>
+                    <div class="input-group mb-3 search">
+                        <input type="text" class="form-control search-city-form" placeholder="Search City">
+                        <div class="input-group-append">
+                          <button class="btn btn-outline-secondary fas fa-search search-city-button" type="submit"></button>
+                        </div>
+                    </div>
+                <div class="card list-of-city-cards" style="width: 16rem;">
+                    <ul class="list-group list-group-flush city-list-group">
+                    </ul>
+                </div>
                 </div>
             </div>
             <div class="col-xs-8 city-card-col">
@@ -48,7 +57,7 @@
                 <h3>5 Day Forecast</h3>
                 <div class="row">
                     <div class="col-sm-2 city-card-daily-col">
-                        <div class="card">
+                        <div class="card city-card-daily-body">
                         <div class="card-body">
                             <h5 class="card-title city-day" data-value=1></h5>
                             <p class="card-text city-card-daily" data-value=1></p>
@@ -56,7 +65,7 @@
                         </div>
                     </div>
                     <div class="col-sm-2 city-card-daily-col">
-                        <div class="card">
+                        <div class="card city-card-daily-body">
                         <div class="card-body">
                             <h5 class="card-title city-day" data-value=2></h5>
                             <p class="card-text city-card-daily" data-value=2></p>
@@ -64,7 +73,7 @@
                         </div>
                     </div>
                     <div class="col-sm-2 city-card-daily-col">
-                        <div class="card">
+                        <div class="card city-card-daily-body">
                         <div class="card-body">
                             <h5 class="card-title city-day" data-value=3></h5>
                             <p class="card-text city-card-daily" data-value=3></p>
@@ -72,7 +81,7 @@
                         </div>
                     </div>
                     <div class="col-sm-2 city-card-daily-col">
-                        <div class="card">
+                        <div class="card city-card-daily-body">
                         <div class="card-body">
                             <h5 class="card-title city-day" data-value=4></h5>
                             <p class="card-text city-card-daily" data-value=4></p>
@@ -80,7 +89,7 @@
                         </div>
                     </div>
                     <div class="col-sm-2 city-card-daily-col">
-                        <div class="card">
+                        <div class="card city-card-daily-body">
                         <div class="card-body">
                             <h5 class="card-title city-day" data-value=5></h5>
                             <p class="card-text city-card-daily" data-value=5></p>
@@ -97,46 +106,104 @@
 
     <!-- JS -->
     <script type="text/javascript">
+
+        // Local Store Pull
+        var cityList = JSON.parse(localStorage.getItem("allCities"));
+        if (cityList != null) {
+            generateCityList(cityList);
+        }
+
+
+        // List of Cities Generator
+        function generateCityList(cityList) {
+            $(".city-list-group").empty();
+            for (let i = 0; i < cityList.length; i++) {
+                var cityButtonList = $("<li>");
+                cityButtonList.addClass("list-group-item city-card").text(cityList[i].city);
+                cityButtonList.attr("type", "button");
+                $(".city-list-group").append(cityButtonList);
+            }
+        }
+
+        // Search City Event Listener
+        $(".search-city-button").on("click", function() {
+            cityList = JSON.parse(localStorage.getItem("allCities"));
+            if (cityList != null) {
+                cityList.push({ city: $(".search-city-form").val() });
+                localStorage.setItem("allCities", JSON.stringify(cityList));
+                generateCityList(cityList);
+                getCityCoords($(".search-city-form").val());
+            }
+            else {
+                cityList = [{ city: $(".search-city-form").val() }];
+                localStorage.setItem("allCities", JSON.stringify(cityList));
+                generateCityList(cityList);
+            }
+        })
+
+        // City List Event Listener
+        $(document).on("click", ".city-card", function() {
+            console.log($(this).text())
+            getCityCoords($(this).text());
+        })
+
+
+
         var lat = "40.58389873898139";
         var lon = "-111.65965384546135";
         var queryURL = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&units=imperial&exclude=hourly,minutely&appid=362001ca18aa50ad6cce0cd209741e8b";
         console.log(queryURL)
-        $.ajax({
-            url: queryURL,
-            method: "GET"
-        }).then(function(response) {
-            console.log(response)
-            //current weather
-            var currentTemp = response.current.temp;
-            var currentHumidity = response.current.humidity;
-            var currentWind = response.current.wind_speed;
-            var currentUV = response.current.uvi;
-            $(".city-temp").append(" " + currentTemp + " °F");
-            $(".city-humidity").append(" " + currentHumidity + "%");
-            $(".city-wind").append(" " + currentWind + " MPH")
-            $(".city-UV").append(" " + currentUV);
-            //5 day forecast
-            for (let i = 1; i < response.daily.length - 2; i++) {
-                var forecastTemp = response.daily[i].temp.day;
-                var forecastHumidity = response.daily[i].humidity;
-                var forecastDay = moment.unix(response.daily[i].dt).format('MMMM Do YYYY');
-                $(".city-day").each(function() {
-                    if (i == $(this).attr("data-value")) {
-                        $(this).append(forecastDay);
-                    }
-                })
-                $(".city-card-daily").each(function() {
-                    if (i == $(this).attr("data-value")) {
-                        $(this).append("Temp: " + forecastTemp + " °F" + "<br>");
-                        $(this).append("Humidity: " + forecastTemp + "%");
-                    }
-                })
-            }
 
+        function getCityCoords(cityName) {
+            var coordsURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=362001ca18aa50ad6cce0cd209741e8b";
+            $.ajax({
+                url: coordsURL,
+                method: "GET",
+                success: function(coordsResponse) {
+                    console.log(coordsResponse);
+                }
+            })
+        }
+
+
+        function getCityWeather() {
+            $.ajax({
+                url: queryURL,
+                method: "GET",
+                success: function(response) {
+                    console.log(response)
+                    //current weather
+                    var currentTemp = response.current.temp;
+                    var currentHumidity = response.current.humidity;
+                    var currentWind = response.current.wind_speed;
+                    var currentUV = response.current.uvi;
+                    $(".city-temp").append(" " + currentTemp + " °F");
+                    $(".city-humidity").append(" " + currentHumidity + "%");
+                    $(".city-wind").append(" " + currentWind + " MPH")
+                    $(".city-UV").append(" " + currentUV);
+                    //5 day forecast
+                    for (let i = 1; i < response.daily.length - 2; i++) {
+                        var forecastTemp = response.daily[i].temp.day;
+                        var forecastHumidity = response.daily[i].humidity;
+                        var forecastDay = moment.unix(response.daily[i].dt).format('MMMM Do YYYY');
+                        $(".city-day").each(function() {
+                            if (i == $(this).attr("data-value")) {
+                                $(this).append(forecastDay);
+                            }
+                        })
+                        $(".city-card-daily").each(function() {
+                            if (i == $(this).attr("data-value")) {
+                                $(this).append("Temp: " + forecastTemp + " °F" + "<br>");
+                                $(this).append("Humidity: " + forecastTemp + "%");
+                            }
+                        })
+                    }    
+                }
+            })
+        }
+
+        getCityWeather();
         
-            
-        });
-    
     </script>
 
 
