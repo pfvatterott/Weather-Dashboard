@@ -46,7 +46,7 @@
             <div class="col-xs-8 city-card-col">
                 <div class="card city-card-main">
                     <div class="card-body">
-                        <h3 class="city-name">City Goes Here</h3>
+                        <h3 class="city-name"></h3>
                         <div class="city-temp">Temperature:</div>
                         <div class="city-humidity">Humidity:</div>
                         <div class="city-wind">Wind Speed:</div>
@@ -148,26 +148,27 @@
         })
 
 
-
-        var lat = "40.58389873898139";
-        var lon = "-111.65965384546135";
-        var queryURL = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&units=imperial&exclude=hourly,minutely&appid=362001ca18aa50ad6cce0cd209741e8b";
-        console.log(queryURL)
+        var $j = jQuery.noConflict(); // fixes ajax in function calls
 
         function getCityCoords(cityName) {
+            $j(".city-name").text(cityName)
             var coordsURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=362001ca18aa50ad6cce0cd209741e8b";
-            $.ajax({
+            $j.ajax({
                 url: coordsURL,
                 method: "GET",
                 success: function(coordsResponse) {
                     console.log(coordsResponse);
+                    var lat = coordsResponse.coord.lat;
+                    var lon = coordsResponse.coord.lon;
+                    getCityWeather(lat, lon);
                 }
             })
         }
 
 
-        function getCityWeather() {
-            $.ajax({
+        function getCityWeather(lat, lon) {
+            var queryURL = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&units=imperial&exclude=hourly,minutely&appid=362001ca18aa50ad6cce0cd209741e8b";
+            $j.ajax({
                 url: queryURL,
                 method: "GET",
                 success: function(response) {
@@ -177,10 +178,10 @@
                     var currentHumidity = response.current.humidity;
                     var currentWind = response.current.wind_speed;
                     var currentUV = response.current.uvi;
-                    $(".city-temp").append(" " + currentTemp + " °F");
-                    $(".city-humidity").append(" " + currentHumidity + "%");
-                    $(".city-wind").append(" " + currentWind + " MPH")
-                    $(".city-UV").append(" " + currentUV);
+                    $(".city-temp").text("Temperature: " + currentTemp + " °F");
+                    $(".city-humidity").text("Humidity: " + currentHumidity + "%");
+                    $(".city-wind").text("Wind Speed: " + currentWind + " MPH")
+                    $(".city-UV").text("UV-Index: " + currentUV);
                     //5 day forecast
                     for (let i = 1; i < response.daily.length - 2; i++) {
                         var forecastTemp = response.daily[i].temp.day;
@@ -188,13 +189,14 @@
                         var forecastDay = moment.unix(response.daily[i].dt).format('MMMM Do YYYY');
                         $(".city-day").each(function() {
                             if (i == $(this).attr("data-value")) {
+                                $(this).empty();
                                 $(this).append(forecastDay);
                             }
                         })
                         $(".city-card-daily").each(function() {
                             if (i == $(this).attr("data-value")) {
-                                $(this).append("Temp: " + forecastTemp + " °F" + "<br>");
-                                $(this).append("Humidity: " + forecastTemp + "%");
+                                $(this).empty();
+                                $(this).append("Temp: " + forecastTemp + " °F" + "<br>" + "Humidity: " + forecastHumidity + "%");
                             }
                         })
                     }    
@@ -202,7 +204,7 @@
             })
         }
 
-        getCityWeather();
+        getCityCoords(cityList[0].city);
         
     </script>
 
