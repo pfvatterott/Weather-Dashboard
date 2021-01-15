@@ -39,10 +39,10 @@
     position: absolute;
     padding-left: 320px;
     padding-top: 30px;
-    width: 1200px;
+    width: 1400px;
     z-index: -1;
 }
 
 .city-card-daily-body{
-    width: 150px;
+    width: 170px;
 }

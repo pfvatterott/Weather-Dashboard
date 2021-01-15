@@ -52,7 +52,10 @@
                 <div class="card city-card-main">
                     <div class="card-body">
                         <h3 class="city-name"></h3>
+                        <img class="city-icon"/>
+                        <h6>Current Conditions:</h6>
                         <div class="city-temp">Temperature:</div>
+                        <div class="city-precip">Precipitation:</div>
                         <div class="city-humidity">Humidity:</div>
                         <div class="city-wind">Wind Speed:</div>
                         <div class="city-UV">UV-Index:</div>
@@ -180,17 +183,22 @@
                 success: function (response) {
                     console.log(response)
                     //current weather
+                    var currentIcon = "https://openweathermap.org/img/w/" + response.current.weather[0].icon + ".png";
                     var currentTemp = response.current.temp;
                     var currentHumidity = response.current.humidity;
                     var currentWind = response.current.wind_speed;
                     var currentUV = response.current.uvi;
+                    var currentPrecip = response.daily[0].pop * 100;
+                    $(".city-icon").attr("src", currentIcon);
                     $(".city-temp").text("Temperature: " + currentTemp + " °F");
+                    $(".city-precip").text("Precipitation: " + currentPrecip + "%")
                     $(".city-humidity").text("Humidity: " + currentHumidity + "%");
                     $(".city-wind").text("Wind Speed: " + currentWind + " MPH")
                     $(".city-UV").text("UV-Index: " + currentUV);
                     //5 day forecast
                     for (let i = 1; i < response.daily.length - 2; i++) {
                         var forecastTemp = response.daily[i].temp.day;
+                        var forecastPrecip = response.daily[i].pop * 100;
                         var forecastHumidity = response.daily[i].humidity;
                         var forecastDay = moment.unix(response.daily[i].dt).format('MMMM Do YYYY');
                         $(".city-day").each(function () {
@@ -202,7 +210,8 @@
                         $(".city-card-daily").each(function () {
                             if (i == $(this).attr("data-value")) {
                                 $(this).empty();
-                                $(this).append("Temp: " + forecastTemp + " °F" + "<br>" + "Humidity: " + forecastHumidity + "%");
+                                $(this).append("Temp: " + forecastTemp + " °F" + "<br>" + "Humidity: " + forecastHumidity 
+                                + "%" + "<br>" + "Precipitation: " + forecastPrecip + "%");
                             }
                         })
                     }
