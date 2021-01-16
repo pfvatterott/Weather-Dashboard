@@ -39,18 +39,15 @@
 }
 
 .city-card-col {
-    /* position: absolute; */
-    /* padding-left: 320px;
-    padding-top: 30px; */
     width: 70%;
-    padding-left: 10px;
-    padding-top: 20px;
-    /* z-index: -1; */
+    padding-left: 20px;
+    padding-top: 30px;
 }
 
 .city-card-daily-body{
-    width: 100%;
     background-image: linear-gradient(#43C6AC, #F8FFAE);
+    max-height: 220px;
+    width: 170px;
 }
 
 .city-icon {
