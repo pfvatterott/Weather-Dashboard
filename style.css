@@ -4,7 +4,7 @@
 
 /* Left Column Formatting */
 .fixed-left {
-    height: 1000px;
+    height: 100%;
     padding-left: 10px;
     left: 200px;
 }
@@ -34,8 +34,9 @@
 }
 
 .city-card-main {
-    width: 60%;
+    width: 95%;
     background-image: linear-gradient(#6190E8, #A7BFE8);
+    max-width: 600px;
 }
 
 .city-card-col {
@@ -47,7 +48,8 @@
 .city-card-daily-body{
     background-image: linear-gradient(#43C6AC, #F8FFAE);
     max-height: 220px;
-    width: 170px;
+    min-width: 170px;
+    width: 95%;
 }
 
 .city-icon {
