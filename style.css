@@ -11,16 +11,18 @@
 
 .left-column {
     padding-left: 20px;
-    width: 300px;
+    width: 20%;
 }
 
 .search {
-    width: 250px;
+    width: 95%;
 }
 
 .list-of-city-cards {
     margin-top: 30px;
+    width: 95%;
 }
+
 
 .city-card:hover {
     background-color: lightgrey;
