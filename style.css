@@ -46,3 +46,8 @@
 .city-card-daily-body{
     width: 170px;
 }
+
+.city-icon {
+    float: left;
+    width: 40px;
+}
