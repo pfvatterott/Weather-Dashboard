@@ -33,6 +33,7 @@
 
 .city-card-main {
     width: 60%;
+    background-image: linear-gradient(#6190E8, #A7BFE8);
 }
 
 .city-card-col {
@@ -45,9 +46,15 @@
 
 .city-card-daily-body{
     width: 170px;
+    background-image: linear-gradient(#43C6AC, #F8FFAE);
 }
 
 .city-icon {
     float: left;
-    width: 40px;
+    width: 60px;
+    padding-right: 10px;
+}
+
+.city-description {
+    text-transform: capitalize;
 }

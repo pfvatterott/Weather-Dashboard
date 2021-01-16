@@ -53,7 +53,9 @@
                     <div class="card-body">
                         <img class="city-icon"/>
                         <h3 class="city-name"></h3>
-                        <h6>Current Conditions:</h6>
+                        <h6 class="city-description"></h6>
+                        <br>
+                        <h4>Current Conditions:</h4>
                         <div class="city-temp">Temperature:</div>
                         <div class="city-precip">Precipitation:</div>
                         <div class="city-humidity">Humidity:</div>
@@ -194,7 +196,9 @@
                     var currentWind = response.current.wind_speed;
                     var currentUV = response.current.uvi;
                     var currentPrecip = response.daily[0].pop * 100;
+                    var currentDescription = response.current.weather[0].description;
                     $(".city-icon").attr("src", currentIcon);
+                    $(".city-description").text(currentDescription);
                     $(".city-temp").text("Temperature: " + currentTemp + " °F");
                     $(".city-precip").text("Precipitation: " + currentPrecip + "%")
                     $(".city-humidity").text("Humidity: " + currentHumidity + "%");
@@ -206,7 +210,7 @@
                         var forecastTemp = response.daily[i].temp.day;
                         var forecastPrecip = response.daily[i].pop * 100;
                         var forecastHumidity = response.daily[i].humidity;
-                        var forecastDay = moment.unix(response.daily[i].dt).format('MMMM Do YYYY');
+                        var forecastDay = moment.unix(response.daily[i].dt).format('ddd D');
                         $(".city-day").each(function () {
                             if (i == $(this).attr("data-value")) {
                                 $(this).empty();
