@@ -17,7 +17,8 @@ function generateCityList(cityList) {
 }
 
 // Search City Event Listener
-$(".search-city-button").on("click", function () {
+$(".search-city-button").on("click", function (event) {
+    event.preventDefault();
     cityList = JSON.parse(localStorage.getItem("allCities"));
     if (cityList != null) {
         cityList.push({ city: $(".search-city-form").val() });
@@ -77,7 +78,23 @@ function getCityWeather(lat, lon) {
             $(".city-precip").text("Precipitation: " + currentPrecip + "%")
             $(".city-humidity").text("Humidity: " + currentHumidity + "%");
             $(".city-wind").text("Wind Speed: " + currentWind + " MPH")
-            $(".city-UV").text("UV-Index: " + currentUV);
+            $(".city-UV").text(currentUV);
+
+            //UV Index Color Formatting
+            if (currentUV < 3) {
+                $(".city-UV").css("background-color", "green");
+            } else if (currentUV > 2 && currentUV < 6) {
+                $(".city-UV").css("background-color", "yellow");
+                $(".city-UV").css("color", "black");
+            } else if (currentUV > 5 && currentUV < 8) {
+                $(".city-UV").css("background-color", "orange");
+                $(".city-UV").css("color", "black");
+            } else if (currentUV > 7 && currentUV < 11) {
+                $(".city-UV").css("background-color", "red");
+            } else {
+                $(".city-UV").css("background-color", "#954F71");
+            }
+
             //5 day forecast
             for (let i = 1; i < response.daily.length - 2; i++) {
                 var forecastIcon = "https://openweathermap.org/img/w/" + response.daily[i].weather[0].icon + ".png";
@@ -94,11 +111,11 @@ function getCityWeather(lat, lon) {
                 $(".city-card-daily").each(function () {
                     if (i == $(this).attr("data-value")) {
                         $(this).empty();
-                        $(this).append("Temp: " + forecastTemp + " °F" + "<br>" + "Humidity: " + forecastHumidity 
-                        + "%" + "<br>" + "Precipitation: " + forecastPrecip + "%");
+                        $(this).append("Temp: " + forecastTemp + " °F" + "<br>" + "Humidity: " + forecastHumidity
+                            + "%" + "<br>" + "Precipitation: " + forecastPrecip + "%");
                     }
                 })
-                $(".city-card-icon").each(function() {
+                $(".city-card-icon").each(function () {
                     if (i == $(this).attr("alt")) {
                         $(this).attr("src", forecastIcon);
                     }

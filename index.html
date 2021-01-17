@@ -33,13 +33,13 @@
                 <div class="fixed-left bg-light">
                     <br>
                     <h3>Search for a City:</h3>
-                    <div class="input-group mb-3 search">
+                    <form class="input-group mb-3 search">
                         <input type="text" class="form-control search-city-form" placeholder="Search City">
                         <div class="input-group-append">
                             <button class="btn btn-outline-secondary fas fa-search search-city-button"
                                 type="submit"></button>
                         </div>
-                    </div>
+                    </form>
                     <div class="card list-of-city-cards">
                         <ul class="list-group list-group-flush city-list-group">
                         </ul>
@@ -48,17 +48,18 @@
             </div>
             <div class="col-xs-8 city-card-col">
                 <div class="card city-card-main">
-                    <div class="card-body">
+                    <div class="card-body city-card-text">
                         <img class="city-icon"/>
                         <h3 class="city-name"></h3>
                         <h6 class="city-description"></h6>
                         <br>
                         <h4>Current Conditions:</h4>
-                        <div class="city-temp">Temperature:</div>
-                        <div class="city-precip">Precipitation:</div>
-                        <div class="city-humidity">Humidity:</div>
-                        <div class="city-wind">Wind Speed:</div>
-                        <div class="city-UV">UV-Index:</div>
+                        <div class="city-temp"></div>
+                        <div class="city-precip"></div>
+                        <div class="city-humidity"></div>
+                        <div class="city-wind"></div>
+                        <p class="UV-Index">UV-Index: </p>
+                        <div class="btn btn-primary city-UV"></div>
                     </div>
                 </div>
                 <br>
@@ -134,6 +135,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <!-- Link to JavaScript -->
     <script src="./index.js"></script>
 </body>
 
