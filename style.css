@@ -50,6 +50,7 @@
     max-height: 220px;
     min-width: 170px;
     width: 95%;
+    margin-right: 10px;
 }
 
 .city-icon {
@@ -61,7 +62,6 @@
 .city-description {
     text-transform: capitalize;
 }
-
 
 /* Footer */
 

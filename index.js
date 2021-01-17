@@ -39,6 +39,7 @@ $(document).on("click", ".city-card", function () {
     getCityCoords($(this).text());
 })
 
+
 function getCityCoords(cityName) {
     $(".city-name").text(cityName)
     var coordsURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=362001ca18aa50ad6cce0cd209741e8b";
@@ -68,7 +69,7 @@ function getCityWeather(lat, lon) {
             var currentHumidity = response.current.humidity;
             var currentWind = response.current.wind_speed;
             var currentUV = response.current.uvi;
-            var currentPrecip = response.daily[0].pop * 100;
+            var currentPrecip = Math.round(response.daily[0].pop * 100);
             var currentDescription = response.current.weather[0].description;
             $(".city-icon").attr("src", currentIcon);
             $(".city-description").text(currentDescription);
@@ -81,7 +82,7 @@ function getCityWeather(lat, lon) {
             for (let i = 1; i < response.daily.length - 2; i++) {
                 var forecastIcon = "https://openweathermap.org/img/w/" + response.daily[i].weather[0].icon + ".png";
                 var forecastTemp = response.daily[i].temp.day;
-                var forecastPrecip = response.daily[i].pop * 100;
+                var forecastPrecip = Math.round(response.daily[i].pop * 100);
                 var forecastHumidity = response.daily[i].humidity;
                 var forecastDay = moment.unix(response.daily[i].dt).format('ddd D');
                 $(".city-day").each(function () {
