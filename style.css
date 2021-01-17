@@ -12,6 +12,8 @@
 .left-column {
     padding-left: 20px;
     width: 30%;
+    max-width: 300px;
+    min-width: 100px;
 }
 
 .search {
