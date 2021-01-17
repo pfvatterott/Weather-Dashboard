@@ -7,6 +7,7 @@ if (cityList != null) {
 
 // List of Cities Generator
 function generateCityList(cityList) {
+    $(".list-of-city-cards").css("visibility", "visible");
     $(".city-list-group").empty();
     for (let i = 0; i < cityList.length; i++) {
         var cityButtonList = $("<li>");
@@ -17,7 +18,7 @@ function generateCityList(cityList) {
 }
 
 // Search City Event Listener
-$(".search-city-button").on("click", function (event) {
+$(".search-city-button").on("click", function(event) {
     event.preventDefault();
     cityList = JSON.parse(localStorage.getItem("allCities"));
     if (cityList != null) {
@@ -41,6 +42,7 @@ $(document).on("click", ".city-card", function () {
 })
 
 
+// Calls API to pull coordinates for searched city
 function getCityCoords(cityName) {
     $(".city-name").text(cityName)
     var coordsURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=362001ca18aa50ad6cce0cd209741e8b";
@@ -56,7 +58,7 @@ function getCityCoords(cityName) {
     })
 }
 
-
+// Calls API with coordinates from getCityCoords() to pull weather information
 function getCityWeather(lat, lon) {
     var queryURL = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&units=imperial&exclude=hourly,minutely&appid=362001ca18aa50ad6cce0cd209741e8b";
     $.ajax({
@@ -127,6 +129,7 @@ function getCityWeather(lat, lon) {
 
 // If no local available run default New York City
 if (cityList === null) {
+    $(".list-of-city-cards").css("visibility", "hidden");
     getCityCoords("New York City");
 } else {
     getCityCoords(cityList[0].city);

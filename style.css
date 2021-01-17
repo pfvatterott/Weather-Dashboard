@@ -23,6 +23,7 @@
 .list-of-city-cards {
     margin-top: 30px;
     width: 90%;
+    text-transform: capitalize;
 }
 
 
@@ -37,6 +38,10 @@
     max-width: 600px;
 }
 
+.city-name {
+    text-transform: capitalize;
+}
+
 .city-description {
     text-transform: capitalize;
 }
@@ -49,7 +54,7 @@
 }
 
 .city-card-text {
-    font-size: 20px;
+    font-size: 22px;
 }
 
 .UV-Index {
