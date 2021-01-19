@@ -49,12 +49,13 @@ function getCityCoords(cityName) {
     $.ajax({
         url: coordsURL,
         method: "GET",
-        error: function() {
+        error: function() { //if error reset list and alert user
             console.log("ERROR HEHE");
             cityList.pop();
             localStorage.setItem("allCities", JSON.stringify(cityList));
             alert("Unknown city, please try again");
             generateCityList(cityList);
+            getCityCoords(cityList[0].city);
         } ,
         success: function (coordsResponse) {
             console.log(coordsResponse);
