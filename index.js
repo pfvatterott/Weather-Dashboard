@@ -18,7 +18,7 @@ function generateCityList(cityList) {
 }
 
 // Search City Event Listener
-$(".search-city-button").on("click", function(event) {
+$(".search-city-button").on("click", function (event) {
     event.preventDefault();
     cityList = JSON.parse(localStorage.getItem("allCities"));
     if (cityList != null) {
@@ -74,6 +74,7 @@ function getCityWeather(lat, lon) {
             var currentUV = response.current.uvi;
             var currentPrecip = Math.round(response.daily[0].pop * 100);
             var currentDescription = response.current.weather[0].description;
+            var currentDay = moment.unix(response.current.dt).format('dddd MMMM Do YYYY');
             $(".city-icon").attr("src", currentIcon);
             $(".city-description").text(currentDescription);
             $(".city-temp").text("Temperature: " + currentTemp + " °F");
@@ -81,6 +82,7 @@ function getCityWeather(lat, lon) {
             $(".city-humidity").text("Humidity: " + currentHumidity + "%");
             $(".city-wind").text("Wind Speed: " + currentWind + " MPH")
             $(".city-UV").text(currentUV);
+            $(".city-date").text(currentDay);
 
             //UV Index Color Formatting
             if (currentUV < 3) {
