@@ -1,13 +1,21 @@
-![Logo of the project](assets/MyPost.png)
+![Logo of the project](assets/images/MyPost.png)
 
 # Weather Dashboard
 
 ## Description
 
-For this project I used JQuery, HTML, and CSS to create a responsive and intuitive weather dashboard.
+For this project I used JQuery, JavaScript, HTML, and CSS to create a responsive and intuitive weather dashboard.
 
 Here are some key features:
-
+1. A current weather dashboard that shows the city, the day, current description and icon, the temperature, precipitation, humidity, wind speed, and UV-Index.
+2. A UV-Index that changes color depending the severity.
+3. A five day forecast that shows the day of the week, a descriptive icon, the temperature, humidity, and precipitation.
+4. A search bar where the user can search for cities to look up the weather.
+5. A list of cities that is generated from the user's searches.
+6. If the user enters an incorrect city an error message appears and the incorrect city is not added to the list.
+7. Local storage that remembers the inputted cities and displays them when the user reloads the page.
+8. The format of the page is reoriented if using a smaller screen.
+9. If no local storage is available upon reload the application defaults to New York City.
 
 ## Installation
 
@@ -17,7 +25,7 @@ To view this website open up the index.html doc using your favorite web browser.
 
 ## Screenshot of Main Page
 
-![Landing page screen shot](assets/screenshot.png)
+![Landing page screen shot](assets/images/screenshot.png)
 
 
 ## Contributing
