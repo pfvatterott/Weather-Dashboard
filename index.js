@@ -49,6 +49,13 @@ function getCityCoords(cityName) {
     $.ajax({
         url: coordsURL,
         method: "GET",
+        error: function() {
+            console.log("ERROR HEHE");
+            cityList.pop();
+            localStorage.setItem("allCities", JSON.stringify(cityList));
+            alert("Unknown city, please try again");
+            generateCityList(cityList);
+        } ,
         success: function (coordsResponse) {
             console.log(coordsResponse);
             var lat = coordsResponse.coord.lat;
